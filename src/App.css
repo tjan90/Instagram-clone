@@ -30,4 +30,18 @@
 }
 .app__posts{
   padding: 20px;
+  display: flex;
+  justify-content: center;
+
+}
+.posts__left{
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.posts__right{
+  margin-left: 20px;
+ 
 }

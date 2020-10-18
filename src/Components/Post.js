@@ -53,14 +53,16 @@ function Post({postId,user,  username, imageURL, caption}) {
             <div className="post__comments">
             { 
                 comments.map((comment) => (
-                <p><strong>{comment.username}</strong>{comment.comment}</p>
+                <p><strong>{comment.username}</strong>  {comment.comments}</p>
                 ))
             }
             </div>
-            <form action="" className='post__commentBox'>
-                <input type="text" className="post__input" placeholder='comments here' value={comments} onChange={(e) => setComments(e.target.value)}/>
-                <button disabled={!comment} className='post__button' type='submit' onClick={postComment}>Post!</button>
-            </form>
+            {user && (
+                <form action="" className='post__commentBox'>
+                    <input type="text" className="post__input" placeholder='comments here' value={comment} onChange={(e) => setComment(e.target.value)}/>
+                    <button disabled={!comment} className='post__button' type='submit' onClick={postComment}>Post!</button>
+                </form>
+            )}
         </div>
     )
 }

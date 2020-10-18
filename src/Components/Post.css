@@ -4,7 +4,7 @@
     border: 1px solid lightgray;
     margin-bottom: 45px;
     box-shadow: 10px lightgray;
-    border-radius: 10px;
+    
 }
 .post__image{
     width: 100%;
@@ -32,6 +32,7 @@
 }
 .post__comments{
     padding-left: 20px;
+    padding-bottom: 10px;
 }
 
 .post__input{

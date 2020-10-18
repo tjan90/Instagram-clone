@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import './App.css';
-import Logo from './assets/instagram-logo.png'
-import Post from './Components/Post'
-import {db, auth, storage} from './firebase'
+import Logo from './assets/instagram-logo.png';
+import Post from './Components/Post';
+import {db, auth, storage} from './firebase';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import { Button, Input } from '@material-ui/core';
-import ImageUpload from './Components/ImageUpload'
+import ImageUpload from './Components/ImageUpload';
+import InstagramEmbed from 'react-instagram-embed';
 
 function getModalStyle() {
   const top = 50;
@@ -89,7 +90,13 @@ const SignUp = (event) =>{
 }
 const SignIn = (event) => {
   event.preventDefault();
-  auth.signInWithEmailAndPassword(email, password).catch((error)=>alert(error.message))
+  auth.signInWithEmailAndPassword(email, password)
+  // .then((authUser ) => {
+  //   authUser.user.updateProfile({
+  //     imageURL: imageURL
+  //   })
+  // })
+  .catch((error)=>alert(error.message))
   setOpenSignIn(false)
 }
   return (
@@ -144,7 +151,11 @@ const SignIn = (event) => {
           />
       {
         user ? (
+          <div className="app__login">
+            {/* <img className='displayPicture' src={user.imageURL} alt='post' /> */}
             <Button onClick={()=> auth.signOut()}>LogOut</Button>
+          </div>
+            
             ) : (
             <div className="app__loginContainer">
             <Button onClick={()=> setOpenSignIn(true)}>SignIn</Button>
@@ -156,6 +167,7 @@ const SignIn = (event) => {
       {/* <Button onClick={() => setOpen(true)} SignIn></Button> */}
       {/*  Posts */}
       <div className="app__posts">
+        <div className="posts__left">
         {
           posts.map(({id, post} )=> (
             <Post
@@ -167,6 +179,22 @@ const SignIn = (event) => {
               imageURL={post.imageURL}/>
           ))
         }
+        </div>
+        <div className="posts__right">
+          <InstagramEmbed
+                url='https://www.instagram.com/p/CFj-cD_IHlf'
+                maxWidth={320}
+                hideCaption={false}
+                containerTagName='div'
+                protocol=''
+                injectScript
+                onLoading={() => {}}
+                onSuccess={() => {}}
+                onAfterRender={() => {}}
+                onFailure={() => {}}
+              />
+        </div>
+       
       </div>
       
     </div>
